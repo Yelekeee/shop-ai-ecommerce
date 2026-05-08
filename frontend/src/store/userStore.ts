@@ -24,7 +24,7 @@ export const useUserStore = create<UserState>()(
       },
     }),
     {
-      name: 'qolda-user',
+      name: 'shopai-user',
       partialize: state => ({ user: state.user, token: state.token }),
     }
   )

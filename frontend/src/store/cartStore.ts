@@ -65,6 +65,6 @@ export const useCartStore = create<CartState>()(
 
       count: () => get().items.reduce((sum, item) => sum + item.quantity, 0),
     }),
-    { name: 'qolda-cart' }
+    { name: 'shopai-cart' }
   )
 )
