@@ -9,7 +9,6 @@ class UserRegister(BaseModel):
     name: str
     email: EmailStr
     password: str
-    is_seller: bool = False
 
 
 class UserLogin(BaseModel):
@@ -22,7 +21,6 @@ class UserOut(BaseModel):
     name: str
     email: str
     is_admin: bool
-    is_seller: bool
     created_at: datetime
 
     model_config = {"from_attributes": True}
@@ -35,19 +33,6 @@ class Token(BaseModel):
 
 
 # ── Products ──────────────────────────────────────────────────────────────────
-
-class ProductCreate(BaseModel):
-    name_ru: str
-    name_kz: str
-    description_ru: Optional[str] = None
-    description_kz: Optional[str] = None
-    category: str
-    subcategory: Optional[str] = None
-    price: float
-    discount_price: Optional[float] = None
-    image_url: Optional[str] = None
-    stock: int = 100
-
 
 class ProductOut(BaseModel):
     id: int
@@ -64,7 +49,6 @@ class ProductOut(BaseModel):
     stock: int
     avg_rating: float
     review_count: int
-    seller_id: Optional[int] = None
     created_at: datetime
 
     model_config = {"from_attributes": True}
@@ -107,8 +91,6 @@ class CartItem(BaseModel):
 class OrderCreate(BaseModel):
     items: List[CartItem]
     delivery_address: str
-    customer_name: Optional[str] = None
-    customer_phone: Optional[str] = None
 
 
 class OrderItemOut(BaseModel):
@@ -127,35 +109,10 @@ class OrderOut(BaseModel):
     total_amount: float
     status: str
     delivery_address: Optional[str] = None
-    customer_name: Optional[str] = None
-    customer_phone: Optional[str] = None
     created_at: datetime
     items: List[OrderItemOut] = []
 
     model_config = {"from_attributes": True}
-
-
-class SellerOrderOut(BaseModel):
-    id: int
-    total_amount: float
-    status: str
-    delivery_address: Optional[str] = None
-    customer_name: Optional[str] = None
-    customer_phone: Optional[str] = None
-    buyer_name: str
-    buyer_email: str
-    created_at: datetime
-    items: List[OrderItemOut] = []
-
-    model_config = {"from_attributes": True}
-
-
-# ── Seller ────────────────────────────────────────────────────────────────────
-
-class SellerStats(BaseModel):
-    total_products: int
-    total_orders: int
-    total_revenue: float
 
 
 # ── Recommendations ───────────────────────────────────────────────────────────
